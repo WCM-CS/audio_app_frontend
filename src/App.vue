@@ -1,26 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app-background">
+    <h1 class="center-text text-color"> Basic Audio Player</h1>
+    <AudioSelector @audio-selected="updateAudio" />
+    <AudioPlayer :key="currentAudio" :audio-url="currentAudio" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AudioPlayer from './components/AudioPlayer.vue';
+import AudioSelector from './components/AudioSelector.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AudioPlayer,
+    AudioSelector
+  },
+  data() {
+    return {
+      currentAudio: ''
+    };
+  },
+  methods: {
+    updateAudio(selectedAudio) {
+      this.currentAudio = selectedAudio;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.app-background {
+  background-color: #c3b091; /* Gloss khaki */
+  height: 100vh;
+  border: 8px solid #00004d;
+  display: flex; /* Keeps the layout flexible */
+  flex-direction: column; /* Stacks elements vertically */
+  align-items: center; /* Centers children horizontally */
+}
+
+.center-text {
+  text-align: center; /* Centers the text horizontally */
+  margin: 0; /* Removes any default margin */
+}
+
+.text-color {
+  color: #00004d;
+  text-decoration: underline;
 }
 </style>
